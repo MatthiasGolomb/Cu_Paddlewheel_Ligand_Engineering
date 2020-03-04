@@ -1,24 +1,26 @@
-#Restart?
-#  elsi_restart read_and_write 20
 #Physical settings
   xc                 hse06 0.11    #for HSE06 calculations
   hse_unit           B          #for HSE06 calculations
 #  xc                 hf         #for HF calculations
 #  xc                 pbesol         #for PBESol calculations
-  spin               collinear      #for spin-polarized (unrestricted) calcs
+  spin               none      #for spin-polarized (unrestricted) calcs
   relativistic       atomic_zora scalar #Atomic ZORA approximation (computationally cheap)
-
 # SCF settings #relaxed convergence criteria
   sc_accuracy_rho    1E-4
   sc_accuracy_eev    1E-2
   sc_accuracy_etot   1E-5
   sc_iter_limit      100
 
+k_grid 4 4 4 #k-points grid
 
 # OUTPUT keywords
-  output band 0.5 0.0 0.0 0.0 0.0 0.0 21 X Gamma
-  output band 0.0 0.0 0.0 0.0 0.0 0.5 21 Gamma Z
-  exx_band_structure_version 1
+output band 0.5 0.0 0.0 0.0 0.0 0.0 21 X Gamma
+output band 0.0 0.0 0.0 0.0 0.0 0.5 21 Gamma Z
+exx_band_structure_version 1
+
+# DOS plot: eV range, number of points, broadening
+output dos -20. 20. 1000 0.1
+output species_proj_dos -20. 20. 1000 0.05
 # Basis Set:
 ###############################################################################
 #

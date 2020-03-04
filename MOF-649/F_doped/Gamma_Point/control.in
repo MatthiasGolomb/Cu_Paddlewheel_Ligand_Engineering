@@ -1,5 +1,3 @@
-#Restart?
-#  elsi_restart read_and_write 20
 #Physical settings
   xc                 hse06 0.11    #for HSE06 calculations
   hse_unit           B          #for HSE06 calculations
@@ -12,15 +10,299 @@
   sc_accuracy_rho    1E-4
   sc_accuracy_eev    1E-2
   sc_accuracy_etot   1E-5
-  sc_iter_limit      100
+  sc_iter_limit      1000
 
+
+k_grid 1 1 1 #k-points grid
 
 # OUTPUT keywords
-  output band 0.5 0.0 0.0 0.0 0.0 0.0 21 X Gamma
-  output band 0.0 0.0 0.0 0.0 0.0 0.5 21 Gamma Z
-  exx_band_structure_version 1
+# DOS plot: eV range, number of points, broadening
+output dos -20. 20. 1000 0.05
+output species_proj_dos -20. 20. 1000 0.05
+#output cube hartree_potential
+output cube eigenstate 740
+output cube eigenstate 740
+cube spinstate 2
+output cube eigenstate 741
+output cube eigenstate 741
+cube spinstate 2
+output cube eigenstate 742
+output cube eigenstate 742
+cube spinstate 2
+output cube eigenstate 743
+output cube eigenstate 743
+cube spinstate 2
+output cube eigenstate 744
+output cube eigenstate 744
+cube spinstate 2
+output cube eigenstate 745
+output cube eigenstate 745
+cube spinstate 2
+output cube eigenstate 746
+output cube eigenstate 746
+cube spinstate 2
+output cube eigenstate 747
+output cube eigenstate 747
+cube spinstate 2
+output cube eigenstate 748
+output cube eigenstate 748
+cube spinstate 2
+output cube eigenstate 749
+output cube eigenstate 749
+cube spinstate 2
+output cube eigenstate 750
+output cube eigenstate 750
+cube spinstate 2
 # Basis Set:
-###############################################################################
+################################################################################
+#
+#  FHI-aims code project
+# Volker Blum, Fritz Haber Institute Berlin, 2009
+#
+#  Suggested "tight" defaults for N atom (to be pasted into control.in file)
+#
+################################################################################
+  species        N
+#     global species definitions
+    nucleus             7
+    mass                14.0067
+#
+    l_hartree           6
+#
+    cut_pot             4.0  2.0  1.0
+    basis_dep_cutoff    1e-4
+#
+    radial_base         35 7.0
+    radial_multiplier   2
+    angular_grids       specified
+      division   0.1841   50
+      division   0.3514  110
+      division   0.5126  194
+      division   0.6292  302
+      division   0.6939  434
+#      division   0.7396  590
+#      division   0.7632  770
+#      division   0.8122  974
+#      division   1.1604 1202
+#      outer_grid  974
+      outer_grid  434
+################################################################################
+#
+#  Definition of "minimal" basis
+#
+################################################################################
+#     valence basis states
+    valence      2  s   2.
+    valence      2  p   3.
+#     ion occupancy
+    ion_occ      2  s   1.
+    ion_occ      2  p   2.
+################################################################################
+#
+#  Suggested additional basis functions. For production calculations, 
+#  uncomment them one after another (the most important basis functions are
+#  listed first).
+#
+#  Constructed for dimers: 1.0 A, 1.1 A, 1.5 A, 2.0 A, 3.0 A
+#
+################################################################################
+#  "First tier" - improvements: -1193.42 meV to -220.60 meV
+     hydro 2 p 1.8
+     hydro 3 d 6.8
+     hydro 3 s 5.8
+#  "Second tier" - improvements: -80.21 meV to -6.86 meV
+     hydro 4 f 10.8
+     hydro 3 p 5.8
+     hydro 1 s 0.8
+     hydro 5 g 16
+     hydro 3 d 4.9
+#  "Third tier" - improvements: -4.29 meV to -0.53 meV
+#     hydro 3 s 16
+#     ionic 2 p auto
+#     hydro 3 d 6.6
+#     hydro 4 f 11.6
+#  "Fourth tier" - improvements: -0.75 meV to -0.25 meV
+#     hydro 2 p 4.5
+#     hydro 2 s 2.4
+#     hydro 5 g 14.4
+#     hydro 4 d 14.4
+#     hydro 4 f 16.8
+# Further basis functions - -0.21 meV and below
+#     hydro 3 p 14.8
+#     hydro 3 s 4.4
+#     hydro 3 d 19.6
+#     hydro 5 g 12.8
+################################################################################
+#
+# For methods that use the localized form of the "resolution of identity" for
+# the two-electron Coulomb operator (RI_method LVL), particularly Hartree-Fock and
+# hybrid density functional calculations, the highest accuracy can be obtained by
+# uncommenting the line beginning with "for_aux"  below, thus adding an extra g radial
+# function to the construction of the product basis set for the expansion.
+# See Ref. New J. Phys. 17, 093020 (2015) for more information, particularly Figs. 1 and 6.
+#
+################################################################################
+#
+# for_aux hydro 5 g 6.0
+################################################################################
+#
+#  FHI-aims code project
+# Volker Blum, Fritz Haber Institute Berlin, 2010
+#
+#  Suggested "tight" defaults for Cu atom (to be pasted into control.in file)
+#
+################################################################################
+  species        Cu
+#
+    nucleus      29
+    mass         63.546
+#
+    l_hartree    6
+#
+    cut_pot      4.0  2.0  1.0
+    basis_dep_cutoff    1e-4
+#
+    radial_base        53 7.0
+    radial_multiplier  2
+    angular_grids       specified
+      division   0.3478   50
+      division   0.6638  110
+      division   0.9718  194
+      division   1.1992  302
+      division   1.5920  434
+#      division   1.8557  590
+#      division   2.0466  770
+#      division   2.0877  974
+#      division   2.4589 1202
+      outer_grid   434
+################################################################################
+#
+#  Definition of "minimal" basis
+#
+################################################################################
+#     valence basis states
+    valence      4  s   1.
+    valence      3  p   6.
+    valence      3  d  10.
+#     ion occupancy
+    ion_occ      4  s   0.
+    ion_occ      3  p   6.
+    ion_occ      3  d   9.
+################################################################################
+#
+#  Suggested additional basis functions. For production calculations, 
+#  uncomment them one after another (the most important basis functions are
+#  listed first).
+#
+#  Constructed for dimers: 1.8, 2.2, 3.0, 4.0 Ang
+#
+################################################################################
+#  "First tier" - improvements: -211.42 meV to -9.17 meV
+     ionic 4 p auto
+     hydro 4 f 7.4
+     hydro 3 s 2.6
+     hydro 3 d 5
+     hydro 5 g 10.4
+#  "Second tier" - improvements: -2.49 meV to -1.08 meV 
+#     hydro 4 p 5.8
+#     hydro 3 d 2.7
+#     hydro 6 h 15.2
+#     hydro 5 s 10.8
+#     hydro 4 f 16
+#  "Third tier" - improvements: -0.50 meV to -0.21 meV
+#     hydro 4 d 6
+#     hydro 3 p 2.4
+#     hydro 4 f 6.4
+#     hydro 3 s 6.8
+#     hydro 5 g 11.2
+#  "Fourth tier" - improvements: -0.13 meV to -0.05 meV
+#     hydro 4 p 7
+#     hydro 4 s 4
+#     hydro 6 h 14
+#     hydro 4 d 8.6
+#     hydro 5 f 15.2
+################################################################################
+#
+#  FHI-aims code project
+# Volker Blum, Fritz Haber Institute Berlin, 2009
+#
+#  Suggested "tight" defaults for F atom (to be pasted into control.in file)
+#
+################################################################################
+  species        F
+#     global species definitions
+    nucleus             9
+    mass                18.9984032
+#
+    l_hartree           6
+#
+    cut_pot             4.0  2.0  1.0
+    basis_dep_cutoff    1e-4
+#
+    radial_base         37 7.0
+    radial_multiplier   2
+    angular_grids specified 
+      division   0.4014  110
+      division   0.5291  194
+      division   0.6019  302
+      division   0.6814  434
+#      division   0.7989  590
+#      division   0.8965  770
+#      division   1.3427  974
+#      outer_grid   974
+      outer_grid  434
+################################################################################
+#
+#  Definition of "minimal" basis
+#
+################################################################################
+#     valence basis states
+    valence      2  s   2.
+    valence      2  p   5.
+#     ion occupancy
+    ion_occ      2  s   1.
+    ion_occ      2  p   4.
+################################################################################
+#
+#  Suggested additional basis functions. For production calculations, 
+#  uncomment them one after another (the most important basis functions are
+#  listed first).
+#
+#  Constructed for dimers: 1.2 A, 1.418 A, 1.75 A, 2.25 A, 3.25 A
+#
+################################################################################
+#  "First tier" - improvements: -149.44 meV to -45.88 meV
+     hydro 2 p 1.7
+     hydro 3 d 7.4
+     hydro 3 s 6.8
+#  "Second tier" - improvements: -12.96 meV to -1.56 meV
+     hydro 4 f 11.2
+     ionic 2 p auto
+     hydro 1 s 0.75
+     hydro 4 d 8.8
+     hydro 5 g 16.8
+#  "Third tier" - improvements: -0.58 meV to -0.05 meV
+#     hydro 3 p 6.2
+#     hydro 3 s 3.2
+#     hydro 4 f 9.6
+#     hydro 3 s 19.6
+#     hydro 4 d 8.6
+#     hydro 5 g 14.4
+# Further basis functions: -0.05 meV and below
+#     hydro 3 p 4.2
+################################################################################
+#
+# For methods that use the localized form of the "resolution of identity" for
+# the two-electron Coulomb operator (RI_method LVL), particularly Hartree-Fock and
+# hybrid density functional calculations, the highest accuracy can be obtained by
+# uncommenting the line beginning with "for_aux"  below, thus adding an extra g radial
+# function to the construction of the product basis set for the expansion.
+# See Ref. New J. Phys. 17, 093020 (2015) for more information, particularly Figs. 1 and 6.
+#
+################################################################################
+#
+# for_aux hydro 5 g 6.0
+################################################################################
 #
 #  FHI-aims code project
 # Volker Blum, Fritz Haber Institute Berlin, 2009
@@ -273,170 +555,3 @@
 ################################################################################
 #
 # for_aux hydro 5 g 6.0
-################################################################################
-#
-#  FHI-aims code project
-# Volker Blum, Fritz Haber Institute Berlin, 2009
-#
-#  Suggested "tight" defaults for N atom (to be pasted into control.in file)
-#
-################################################################################
-  species        N
-#     global species definitions
-    nucleus             7
-    mass                14.0067
-#
-    l_hartree           6
-#
-    cut_pot             4.0  2.0  1.0
-    basis_dep_cutoff    1e-4
-#
-    radial_base         35 7.0
-    radial_multiplier   2
-    angular_grids       specified
-      division   0.1841   50
-      division   0.3514  110
-      division   0.5126  194
-      division   0.6292  302
-      division   0.6939  434
-#      division   0.7396  590
-#      division   0.7632  770
-#      division   0.8122  974
-#      division   1.1604 1202
-#      outer_grid  974
-      outer_grid  434
-################################################################################
-#
-#  Definition of "minimal" basis
-#
-################################################################################
-#     valence basis states
-    valence      2  s   2.
-    valence      2  p   3.
-#     ion occupancy
-    ion_occ      2  s   1.
-    ion_occ      2  p   2.
-################################################################################
-#
-#  Suggested additional basis functions. For production calculations, 
-#  uncomment them one after another (the most important basis functions are
-#  listed first).
-#
-#  Constructed for dimers: 1.0 A, 1.1 A, 1.5 A, 2.0 A, 3.0 A
-#
-################################################################################
-#  "First tier" - improvements: -1193.42 meV to -220.60 meV
-     hydro 2 p 1.8
-     hydro 3 d 6.8
-     hydro 3 s 5.8
-#  "Second tier" - improvements: -80.21 meV to -6.86 meV
-     hydro 4 f 10.8
-     hydro 3 p 5.8
-     hydro 1 s 0.8
-     hydro 5 g 16
-     hydro 3 d 4.9
-#  "Third tier" - improvements: -4.29 meV to -0.53 meV
-#     hydro 3 s 16
-#     ionic 2 p auto
-#     hydro 3 d 6.6
-#     hydro 4 f 11.6
-#  "Fourth tier" - improvements: -0.75 meV to -0.25 meV
-#     hydro 2 p 4.5
-#     hydro 2 s 2.4
-#     hydro 5 g 14.4
-#     hydro 4 d 14.4
-#     hydro 4 f 16.8
-# Further basis functions - -0.21 meV and below
-#     hydro 3 p 14.8
-#     hydro 3 s 4.4
-#     hydro 3 d 19.6
-#     hydro 5 g 12.8
-################################################################################
-#
-# For methods that use the localized form of the "resolution of identity" for
-# the two-electron Coulomb operator (RI_method LVL), particularly Hartree-Fock and
-# hybrid density functional calculations, the highest accuracy can be obtained by
-# uncommenting the line beginning with "for_aux"  below, thus adding an extra g radial
-# function to the construction of the product basis set for the expansion.
-# See Ref. New J. Phys. 17, 093020 (2015) for more information, particularly Figs. 1 and 6.
-#
-################################################################################
-#
-# for_aux hydro 5 g 6.0
-################################################################################
-#
-#  FHI-aims code project
-# Volker Blum, Fritz Haber Institute Berlin, 2010
-#
-#  Suggested "tight" defaults for Cu atom (to be pasted into control.in file)
-#
-################################################################################
-  species        Cu
-#
-    nucleus      29
-    mass         63.546
-#
-    l_hartree    6
-#
-    cut_pot      4.0  2.0  1.0
-    basis_dep_cutoff    1e-4
-#
-    radial_base        53 7.0
-    radial_multiplier  2
-    angular_grids       specified
-      division   0.3478   50
-      division   0.6638  110
-      division   0.9718  194
-      division   1.1992  302
-      division   1.5920  434
-#      division   1.8557  590
-#      division   2.0466  770
-#      division   2.0877  974
-#      division   2.4589 1202
-      outer_grid   434
-################################################################################
-#
-#  Definition of "minimal" basis
-#
-################################################################################
-#     valence basis states
-    valence      4  s   1.
-    valence      3  p   6.
-    valence      3  d  10.
-#     ion occupancy
-    ion_occ      4  s   0.
-    ion_occ      3  p   6.
-    ion_occ      3  d   9.
-################################################################################
-#
-#  Suggested additional basis functions. For production calculations, 
-#  uncomment them one after another (the most important basis functions are
-#  listed first).
-#
-#  Constructed for dimers: 1.8, 2.2, 3.0, 4.0 Ang
-#
-################################################################################
-#  "First tier" - improvements: -211.42 meV to -9.17 meV
-     ionic 4 p auto
-     hydro 4 f 7.4
-     hydro 3 s 2.6
-     hydro 3 d 5
-     hydro 5 g 10.4
-#  "Second tier" - improvements: -2.49 meV to -1.08 meV 
-#     hydro 4 p 5.8
-#     hydro 3 d 2.7
-#     hydro 6 h 15.2
-#     hydro 5 s 10.8
-#     hydro 4 f 16
-#  "Third tier" - improvements: -0.50 meV to -0.21 meV
-#     hydro 4 d 6
-#     hydro 3 p 2.4
-#     hydro 4 f 6.4
-#     hydro 3 s 6.8
-#     hydro 5 g 11.2
-#  "Fourth tier" - improvements: -0.13 meV to -0.05 meV
-#     hydro 4 p 7
-#     hydro 4 s 4
-#     hydro 6 h 14
-#     hydro 4 d 8.6
-#     hydro 5 f 15.2
